@@ -168,19 +168,19 @@ class UserUI:
         try:
             existing_data = pd.read_excel('User_data.xlsx')
 
-            # Controlla se la finestra esiste già e distruggila se necessario
+            # check window and destroy if needed
             if hasattr(self, 'data_window') and self.data_window.winfo_exists():
                 self.data_window.destroy()
 
-            # Crea una nuova finestra per visualizzare i dati
+            # create new window to check
             self.data_window = tk.Toplevel(self.master)
             self.data_window.title("User Data")
 
-            # Crea un widget Text per visualizzare i dati con una griglia
+            # Create a widget Text to visualize data on grid
             data_text = scrolledtext.ScrolledText(self.data_window, wrap=tk.WORD, width=50, height=10)
             data_text.grid(row=0, column=0, padx=10, pady=10)
 
-            # Inserisci i dati nel widget Text con una griglia e l'indice
+            # insert data in widget text with grid and index
             data_text.insert(tk.END, existing_data.to_string(index=True))
 
         except FileNotFoundError:
