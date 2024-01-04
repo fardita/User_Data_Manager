@@ -4,7 +4,7 @@
 
 This small Python project is designed to manage and interact with user information using a Tkinter-based graphical user interface (GUI) and Pandas for data handling. The project includes two main components:
 
-1. **User Class**: Represents an individual's information, including personal details such as name, surname, gender, employment status, job, country, CAP (Postal Code), and address. The class provides methods to interactively update each attribute. (not used in the current data manager version, goal is to enrich it for further development and integration ).
+1. **User Class**: Represents an individual's information, including personal details such as name, surname, gender, employment status, job, country, CAP (Postal Code), and address. The class provides methods to interactively update each attribute. (not totally used in the current data manager version, goal is to enrich it for further development and integration ).
 
 2. **Tkinter UI**: A user interface for interacting with the User class. It includes entry widgets for user input, labels for attribute descriptions, and buttons to trigger various actions like saving to Excel, visualizing data, and modifying existing data.
 
