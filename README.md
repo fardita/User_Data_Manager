@@ -49,6 +49,6 @@ Make sure to have the required dependencies installed:
 
 ```bash
 pip install pandas openpyxl
-
+```
 ## How to use it #2
-run the exe file UserDataManager!
+**run the exe file UserDataManager!**
