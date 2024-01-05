@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, simpledialog, scrolledtext
 import pandas as pd
+from tkinter import *
 
 class User():
     """
@@ -82,7 +83,7 @@ class User():
         return self.address
 
 
-class UserUI:
+class UserUI():
     """
     Handles the Tkinter user interface to interact with the User class. Includes entry widgets for user input, labels
     for attribute descriptions, and buttons to trigger various actions.
@@ -99,34 +100,33 @@ class UserUI:
     
     def __init__(self, master):
         self.master = master
-        self.master.title("User Informations")
+        self.master.title("User Data Manager")
+        master.geometry("370x350")  # Adjusted the window height
 
-        self.User = User(name="", surname="")  # Create an instance of the User class
+        # Create an instance of the User class
+        self.User = User(name="", surname="")
 
-        # Labels
-        title_label = ttk.Label(self.master, text="User Informations",foreground="red")
-        title_label.grid(row=0, column=0, columnspan=2, pady=10)
-        ttk.Label(self.master, text="Name:").grid(row=1, column=0, sticky=tk.W, padx=5, pady=5)
-        ttk.Label(self.master, text="Surname:").grid(row=2, column=0, sticky=tk.W, padx=5, pady=5)
-        ttk.Label(self.master, text="Status:").grid(row=3, column=0, sticky=tk.W, padx=5, pady=5)
-        ttk.Label(self.master, text="Job:").grid(row=4, column=0, sticky=tk.W, padx=5, pady=5)
+
+        labels = ["Name:", "Surname:", "Status:", "Job:"]
+        for row, label_text in enumerate(labels, start=1):
+            ttk.Label(self.master, text=label_text).grid(row=row, column=0, padx=10, pady=10, sticky="w")
 
         # Entry widgets
         self.name_entry = ttk.Entry(self.master)
-        self.name_entry.grid(row=1, column=1, padx=5, pady=5)
+        self.name_entry.grid(row=1, column=1, padx=10, pady=10, sticky="ew")
         self.surname_entry = ttk.Entry(self.master)
-        self.surname_entry.grid(row=2, column=1, padx=5, pady=5)
+        self.surname_entry.grid(row=2, column=1, padx=10, pady=10, sticky="ew")
         self.status_entry = ttk.Entry(self.master)
-        self.status_entry.grid(row=3, column=1, padx=5, pady=5)
+        self.status_entry.grid(row=3, column=1, padx=10, pady=10, sticky="ew")
         self.job_entry = ttk.Entry(self.master)
-        self.job_entry.grid(row=4, column=1, padx=5, pady=5)
+        self.job_entry.grid(row=4, column=1, padx=10, pady=10, sticky="ew")
 
-        # Save button
-        ttk.Button(self.master, text="Save to Excel", command=self.save_to_excel).grid(row=5, column=0, columnspan=2, pady=10)
+        #buttons in one row
+        button_options = dict(padx=5, pady=10, sticky="ew")
+        ttk.Button(self.master, text="Save to Excel", command=self.save_to_excel).grid(row=5, column=0, columnspan=3, **button_options)
+        ttk.Button(self.master, text="Visualize Data", command=self.show_data).grid(row=6, column=0, columnspan=3, **button_options)
+        ttk.Button(self.master, text="Modify Data", command=self.edit_data).grid(row=7, column=0, columnspan=3, **button_options)
 
-        # Additional buttons for functionalities
-        ttk.Button(self.master, text="Visualize Data", command=self.show_data).grid(row=6, column=0, columnspan=2, pady=10)
-        ttk.Button(self.master, text="Modify Data", command=self.edit_data).grid(row=7, column=0, columnspan=2, pady=10)
 
     def save_to_excel(self):
         """
@@ -178,14 +178,14 @@ class UserUI:
 
             # Create a widget Text to visualize data on grid
             data_text = scrolledtext.ScrolledText(self.data_window, wrap=tk.WORD, width=50, height=10)
-            data_text.grid(row=0, column=0, padx=10, pady=10)
+            data_text.grid(row=0, column=0,padx=10, pady=10)
 
             # insert data in widget text with grid and index
             data_text.insert(tk.END, existing_data.to_string(index=True))
 
         except FileNotFoundError:
-            error_label = ttk.Label(self.master, text="Il file 'User_data.xlsx' non esiste ancora.")
-            error_label.grid(row=7, column=0, columnspan=2, pady=10)
+            error_label = ttk.Label(self.master, text="'User_data.xlsx' does not exist yet.", foreground="red")
+            error_label.grid(row=8, column=0, columnspan=2, pady=10)
 
 
 
